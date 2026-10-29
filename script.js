@@ -1,7 +1,7 @@
 /* ELOOONG — edit CONFIG to go live. Paste the real CA (0x + 40 hex) and everything updates. */
 const CONFIG = {
   CA: '0xfeb0b2ef4e3b530d7ac7d9527be2e007b98b604e',
-  X: 'https://x.com',
+  X: 'https://x.com/elonmusk/status/2115823011399938182',
   TG: '', // Telegram: empty = "Soon"
   CHAIN: 'robinhood'
 }; 
