@@ -4,7 +4,7 @@ const CONFIG = {
   X: 'https://x.com',
   TG: '', // Telegram: empty = "Soon"
   CHAIN: 'robinhood'
-};
+}; 
 (function () {
   'use strict';
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
