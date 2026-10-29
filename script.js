@@ -1,9 +1,9 @@
 /* ELOOONG — edit CONFIG to go live. Paste the real CA (0x + 40 hex) and everything updates. */
 const CONFIG = {
-  CA: 'TBA',
+  CA: '0xfeb0b2ef4e3b530d7ac7d9527be2e007b98b604e',
   X: 'https://x.com',
   TG: '', // Telegram: empty = "Soon"
-  CHAIN: 'hyperevm'
+  CHAIN: 'robinhood'
 };
 (function () {
   'use strict';
@@ -14,7 +14,7 @@ const CONFIG = {
 
   /* ---------- links ---------- */
   const LINKS = {
-    buy: 'https://app.hyperswap.exchange/#/swap?outputCurrency=' + (valid ? CONFIG.CA : 'TBA'),
+    buy: 'https://app.uniswap.org/swap?chain=robinhood&inputCurrency=NATIVE' + (valid ? '&outputCurrency=' + CONFIG.CA : ''),
     chart: 'https://dexscreener.com/' + CONFIG.CHAIN + (valid ? '/' + CONFIG.CA : ''),
     x: CONFIG.X, tg: CONFIG.TG
   };
@@ -23,18 +23,18 @@ const CONFIG = {
     if (url) { a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; }
     else { a.setAttribute('aria-disabled', 'true'); a.removeAttribute('href'); const t = [...a.childNodes].find(n => n.nodeType === 3 && n.textContent.trim()); if (t) t.textContent = ' Soon'; }
   });
-  $$('[data-ca]').forEach(el => el.textContent = valid ? CONFIG.CA : 'TBA');
+  $$('[data-ca]').forEach(el => el.textContent = valid ? CONFIG.CA : '0xfeb0b2ef4e3b530d7ac7d9527be2e007b98b604e');
 
   /* ---------- copy ---------- */
   const toast = $('#toast'); let tt;
   const say = m => { toast.textContent = m; toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove('show'), 2200); };
   const fallbackCopy = t => { const ta = document.createElement('textarea'); ta.value = t; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;opacity:0;left:-9999px'; document.body.appendChild(ta); ta.select(); let ok = false; try { ok = document.execCommand('copy'); } catch (e) {} ta.remove(); return ok; };
   $$('[data-copy]').forEach(b => b.addEventListener('click', async () => {
-    if (!valid) { say('CA is TBA — launching soon. Beware of fake CAs!'); return; }
+    if (!valid) { say('CA is 0xfeb0b2ef4e3b530d7ac7d9527be2e007b98b604e — launching soon. Beware of fake CAs!'); return; }
     let ok = false;
     try { if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(CONFIG.CA); ok = true; } } catch (e) {}
     if (!ok) ok = fallbackCopy(CONFIG.CA);
-    say(ok ? 'CA copied. Stay long.' : 'Copy failed — select the CA manually.');
+    say(ok ? 'CA copied. Stay long in the hood.' : 'Copy failed — select the CA manually.');
   }));
   window.__ELOOONG_copyTest = fallbackCopy;
 
@@ -42,7 +42,7 @@ const CONFIG = {
   if (valid) {
     const f = document.createElement('iframe');
     f.src = 'https://dexscreener.com/' + CONFIG.CHAIN + '/' + CONFIG.CA + '?embed=1&theme=dark&trades=0&info=0';
-    f.title = '$ELOOONG chart on DexScreener'; f.loading = 'lazy';
+    f.title = '$ELOOONG chart on DexScreener, Robinhood Chain'; f.loading = 'lazy';
     $('[data-embed]').appendChild(f); $('[data-embed-overlay]').remove();
   }
 
